@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -24,7 +25,14 @@ try
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(s =>
+    {
+        s.SwaggerDoc("V1", new OpenApiInfo { Title = "V1" });
+
+        // xmlDoc
+        var filePath = Path.Combine(AppContext.BaseDirectory, "MyApi.xml");
+        s.IncludeXmlComments(filePath);
+    });
 
     var app = builder.Build();
 
@@ -32,7 +40,10 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(u =>
+        {
+            u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1");
+        });
     }
 
     app.UseAuthorization();
