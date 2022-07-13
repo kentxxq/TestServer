@@ -11,14 +11,14 @@ namespace TestServer.Controllers;
 public class DelayController
 {
     /// <summary>
-    /// 延迟多少秒返回结果
+    /// 延迟多少毫秒返回结果
     /// </summary>
-    /// <param name="seconds"></param>
+    /// <param name="millisecond">毫秒数</param>
     /// <returns></returns>
-    [HttpGet("{seconds:int}")]
-    public async Task<string> Delay(int seconds)
+    [HttpGet("{millisecond:int}")]
+    public async Task<string> Delay(int millisecond)
     {
-        await Task.Delay(TimeSpan.FromSeconds(seconds));
-        return $"delay {seconds} seconds";
+        await Task.Delay(TimeSpan.FromMilliseconds(millisecond));
+        return $"delay {millisecond} seconds";
     }
 }
