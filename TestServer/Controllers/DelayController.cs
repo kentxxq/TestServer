@@ -7,7 +7,7 @@ namespace TestServer.Controllers;
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class DelayController
 {
     /// <summary>

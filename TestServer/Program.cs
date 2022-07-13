@@ -37,14 +37,13 @@ try
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
+
+    app.UseSwagger();
+    app.UseSwaggerUI(u =>
     {
-        app.UseSwagger();
-        app.UseSwaggerUI(u =>
-        {
-            u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1");
-        });
-    }
+        u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1");
+    });
+
 
     app.UseAuthorization();
 

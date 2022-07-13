@@ -24,7 +24,7 @@ public class WebSocketController : ControllerBase
     /// 连接websocket
     /// </summary>
     [HttpGet]
-    public async Task<string> Hi()
+    public async Task<string> Echo()
     {
         _logger.LogInformation("请求到了ws");
         if (HttpContext.WebSockets.IsWebSocketRequest)
@@ -32,7 +32,7 @@ public class WebSocketController : ControllerBase
             using var websocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
             try
             {
-                await Echo(websocket);
+                await EchoData(websocket);
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ public class WebSocketController : ControllerBase
         return "请求完成";
     }
 
-    private static async Task Echo(WebSocket webSocket)
+    private static async Task EchoData(WebSocket webSocket)
     {
         var buffer = new byte[1024 * 4];
         var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
