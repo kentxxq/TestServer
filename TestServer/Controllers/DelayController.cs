@@ -19,6 +19,6 @@ public class DelayController
     public async Task<string> Delay(int millisecond)
     {
         await Task.Delay(TimeSpan.FromMilliseconds(millisecond));
-        return $"delay {millisecond} seconds";
+        return $"delay {millisecond} ms";
     }
 }
