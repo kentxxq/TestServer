@@ -3,7 +3,7 @@
 namespace TestServer.Controllers;
 
 /// <summary>
-/// websocket控制器
+/// delay控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
