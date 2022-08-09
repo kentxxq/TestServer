@@ -1,4 +1,6 @@
+using System.Net;
 using System.Reflection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
@@ -33,10 +35,17 @@ try
         var filePath = Path.Combine(AppContext.BaseDirectory, "MyApi.xml");
         s.IncludeXmlComments(filePath);
     });
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        // 允许非本机ip转发 options.KnownProxies.Add(IPAddress.Parse("127.0.10.1"));
+        // 允许非规范header头 options.ForwardedForHeaderName = "X-Forwarded-For-My-Custom-Header-Name";
+    });
 
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
+    app.UseForwardedHeaders();
 
     app.UseSwagger();
     app.UseSwaggerUI(u =>
