@@ -6,6 +6,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.SystemConsole.Themes;
+using TestServer.Service;
 
 var logTemplate = "{Timestamp:HH:mm:ss}|{Level:u3}|{SourceContext}|{Message:lj}{Exception}{NewLine}";
 
@@ -23,6 +24,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
+    builder.Services.AddGrpc();
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,7 +55,7 @@ try
         u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1");
     });
 
-
+    app.UseRouting();
     app.UseAuthorization();
 
     var webSocketOptions = new WebSocketOptions
@@ -63,6 +65,11 @@ try
     app.UseWebSockets(webSocketOptions);
 
     app.MapControllers();
+
+    app.UseEndpoints(endpoint =>
+    {
+        endpoint.MapGrpcService<GreeterService>();
+    });
 
     app.Run();
     return 0;
