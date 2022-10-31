@@ -45,6 +45,24 @@ try
     });
 
     var app = builder.Build();
+    
+    #region 生命周期
+
+    app.Lifetime.ApplicationStarted.Register(() =>
+    {
+        Log.Information("ApplicationStarted:启动完成");
+    });
+    app.Lifetime.ApplicationStopping.Register(() =>
+    {
+        // shutdown会停止，直到下面的语句执行完成
+        Log.Warning("ApplicationStopping:正在关闭");
+    });
+    app.Lifetime.ApplicationStopped.Register(() =>
+    {
+        Log.Warning("ApplicationStopped:应用已停止");
+    });
+
+    #endregion
 
     // Configure the HTTP request pipeline.
     app.UseForwardedHeaders();
