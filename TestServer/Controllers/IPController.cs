@@ -13,7 +13,7 @@ namespace TestServer.Controllers;
 public class IPController:Controller
 {
     /// <summary>
-    /// +1
+    /// 访问者的ip信息
     /// </summary>
     /// <returns></returns>
     [HttpGet]
