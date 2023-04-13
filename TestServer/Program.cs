@@ -1,4 +1,3 @@
-using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.OpenApi.Models;
@@ -6,6 +5,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.SystemConsole.Themes;
+using TestServer.Extensions;
 using TestServer.Service;
 
 var logTemplate = "{Timestamp:HH:mm:ss}|{Level:u3}|{SourceContext}|{Message:lj}{Exception}{NewLine}";
@@ -23,20 +23,11 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
     builder.Services.AddGrpc();
 
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen(s =>
-    {
-        s.SwaggerDoc("V1", new OpenApiInfo { Title = "V1" });
-
-        // xmlDoc
-        var filePath = Path.Combine(AppContext.BaseDirectory, "MyApi.xml");
-        s.IncludeXmlComments(filePath);
-    });
+    builder.Services.AddMySwagger();
     builder.Services.Configure<ForwardedHeadersOptions>(options =>
     {
         options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
@@ -84,10 +75,7 @@ try
 
     app.MapControllers();
 
-    app.UseEndpoints(endpoint =>
-    {
-        endpoint.MapGrpcService<GreeterService>();
-    });
+    app.MapGrpcService<GreeterService>();
 
     app.Run();
     return 0;
