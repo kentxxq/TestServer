@@ -8,7 +8,7 @@ namespace TestServer.Controllers;
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("[controller]/[action]")]
 public class WebSocketController : ControllerBase
 {
     private readonly ILogger<WebSocketController> _logger;

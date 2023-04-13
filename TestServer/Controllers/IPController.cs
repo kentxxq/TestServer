@@ -1,6 +1,6 @@
-﻿using kentxxq.Utils;
-using kentxxq.Utils.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using TestServer.Tools.Ip;
+using TestServer.Tools.Ip.Models;
 
 namespace TestServer.Controllers;
 
@@ -9,18 +9,28 @@ namespace TestServer.Controllers;
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
-[Route("api/[controller]/[action]")]
-public class IPController:Controller
+[Route("[controller]")]
+public class IPController : ControllerBase
 {
     /// <summary>
     /// 访问者的ip信息
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IpInfo> Info()
+    public async Task<IpServiceModel> VisitorInfo()
     {
-        var ipService = new IP(new HttpClient());
-        var ipInfo =await ipService.GetIpInfoByIp(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "");
-        return ipInfo;
+        var result = await IPInfo.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "");
+        return result;
+    }
+    
+    /// <summary>
+    /// 查看特定的ip信息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("{ip?}")]
+    public async Task<IpServiceModel> IpInfo(string ip)
+    {
+        var result = await IPInfo.GetIpInfo(ip);
+        return result;
     }
 }

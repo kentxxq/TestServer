@@ -7,8 +7,8 @@ namespace TestServer.Controllers;
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
-[Route("api/[controller]/[action]")]
-public class CounterController
+[Route("[controller]/[action]")]
+public class CounterController : ControllerBase
 {
     private static int _count = 0;
 

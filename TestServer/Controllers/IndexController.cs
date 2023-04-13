@@ -8,9 +8,9 @@ namespace TestServer.Controllers;
 /// <summary>
 /// index控制器
 /// </summary>
-/// [ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
-public class IndexController
+public class IndexController : ControllerBase
 {
     private readonly ISwaggerProvider _swaggerProvider;
 
@@ -28,7 +28,7 @@ public class IndexController
     /// </summary>
     /// <returns></returns>
     [HttpGet("/")]
-    public string Index(int millisecond)
+    public string Index()
     {
         var swaggerDoc = _swaggerProvider.GetSwagger("V1");
         var data = swaggerDoc.Paths.ToDictionary(path => path.Key, path => path.Value.Operations.First().Value.Summary);
