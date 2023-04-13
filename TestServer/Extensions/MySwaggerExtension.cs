@@ -18,7 +18,7 @@ public static class MySwaggerExtension
         service.AddEndpointsApiExplorer();
         service.AddSwaggerGen(s =>
         {
-            s.SwaggerDoc("Examples", new OpenApiInfo { Title = "Examples", Version = "v1" });
+            s.SwaggerDoc("V1", new OpenApiInfo { Title = "V1", Version = "V1" });
 
             // xmlDoc
             var filePath = Path.Combine(AppContext.BaseDirectory, "MyApi.xml");
