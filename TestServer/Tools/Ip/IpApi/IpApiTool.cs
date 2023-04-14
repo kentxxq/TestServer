@@ -1,7 +1,16 @@
 ﻿namespace TestServer.Tools.Ip.IpApi;
 
+/// <summary>
+/// ip-api工具
+/// </summary>
 public static class IpApiTool
 {
+    /// <summary>
+    /// 获取ip信息
+    /// </summary>
+    /// <param name="ip"></param>
+    /// <returns></returns>
+    /// <exception cref="ApplicationException"></exception>
     public static async Task<IpServiceModel> GetIpInfo(string ip)
     {
         var httpClient = new HttpClient();

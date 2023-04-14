@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TestServer.Service;
 using TestServer.Tools.Ip;
-using TestServer.Tools.Ip.IpApi;
 
 namespace TestServer.Controllers;
 
@@ -15,6 +14,10 @@ public class IPController : ControllerBase
 {
     private readonly IpService _ipService;
 
+    /// <summary>
+    /// 依赖注入
+    /// </summary>
+    /// <param name="ipService"></param>
     public IPController(IpService ipService)
     {
         _ipService = ipService;
