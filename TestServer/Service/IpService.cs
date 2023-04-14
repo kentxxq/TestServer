@@ -1,5 +1,4 @@
-﻿using IP2Region.Net.XDB;
-using TestServer.Tools.Ip;
+﻿using TestServer.Tools.Ip;
 using TestServer.Tools.Ip.Ip2Region;
 using TestServer.Tools.Ip.IpApi;
 
@@ -10,8 +9,8 @@ namespace TestServer.Service;
 /// </summary>
 public class IpService
 {
+    private static readonly IpServiceModel QueryFailed = new() { Status = "failed" };
     private readonly ILogger<IpService> _logger;
-    private static readonly IpServiceModel QueryFailed = new IpServiceModel { Status = "failed" };
 
     /// <summary>
     /// 依赖注入
@@ -40,7 +39,7 @@ public class IpService
             var result = Ip2RegionTool.GetIpInfo(ip);
             return result;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _logger.LogError("查询{IP}信息失败：{EMessage}", ip, e.Message);
             return QueryFailed;

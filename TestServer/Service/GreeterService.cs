@@ -6,7 +6,7 @@ namespace TestServer.Service;
 /// <summary>
 /// 演示greeter-GRPC
 /// </summary>
-public class GreeterService:Greeter.GreeterBase
+public class GreeterService : Greeter.GreeterBase
 {
     /// <summary>
     /// 响应hello请求

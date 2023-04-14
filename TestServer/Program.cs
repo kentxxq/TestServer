@@ -1,7 +1,6 @@
 using System.Reflection;
 using IP2Region.Net.XDB;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -25,7 +24,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddGrpc();
-    builder.Services.AddSingleton<ISearcher,Searcher>();
+    builder.Services.AddSingleton<ISearcher, Searcher>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMySwagger();
@@ -39,22 +38,16 @@ try
     builder.Services.AddTransient<IpService>();
 
     var app = builder.Build();
-    
+
     #region 生命周期
 
-    app.Lifetime.ApplicationStarted.Register(() =>
-    {
-        Log.Information("ApplicationStarted:启动完成");
-    });
+    app.Lifetime.ApplicationStarted.Register(() => { Log.Information("ApplicationStarted:启动完成"); });
     app.Lifetime.ApplicationStopping.Register(() =>
     {
         // shutdown会停止，直到下面的语句执行完成
         Log.Warning("ApplicationStopping:正在关闭");
     });
-    app.Lifetime.ApplicationStopped.Register(() =>
-    {
-        Log.Warning("ApplicationStopped:应用已停止");
-    });
+    app.Lifetime.ApplicationStopped.Register(() => { Log.Warning("ApplicationStopped:应用已停止"); });
 
     #endregion
 
@@ -62,17 +55,14 @@ try
     app.UseForwardedHeaders();
 
     app.UseSwagger();
-    app.UseSwaggerUI(u =>
-    {
-        u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1");
-    });
+    app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1"); });
 
     app.UseRouting();
     app.UseAuthorization();
 
     var webSocketOptions = new WebSocketOptions
     {
-        KeepAliveInterval = TimeSpan.FromSeconds(120),
+        KeepAliveInterval = TimeSpan.FromSeconds(120)
     };
     app.UseWebSockets(webSocketOptions);
 
@@ -92,5 +82,3 @@ finally
 {
     Log.CloseAndFlush();
 }
-
-

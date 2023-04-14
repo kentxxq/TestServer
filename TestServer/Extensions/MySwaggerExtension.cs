@@ -14,7 +14,6 @@ public static class MySwaggerExtension
     /// <returns></returns>
     public static IServiceCollection AddMySwagger(this IServiceCollection service)
     {
-        
         service.AddEndpointsApiExplorer();
         service.AddSwaggerGen(s =>
         {

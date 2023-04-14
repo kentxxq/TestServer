@@ -10,7 +10,7 @@ namespace TestServer.Controllers;
 [Route("[controller]/[action]")]
 public class CounterController : ControllerBase
 {
-    private static int _count = 0;
+    private static int _count;
 
     /// <summary>
     /// +1

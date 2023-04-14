@@ -32,7 +32,7 @@ public class IndexController : ControllerBase
     {
         var swaggerDoc = _swaggerProvider.GetSwagger("V1");
         var data = swaggerDoc.Paths.ToDictionary(path => path.Key, path => path.Value.Operations.First().Value.Summary);
-        var result = JsonSerializer.Serialize(data, new JsonSerializerOptions()
+        var result = JsonSerializer.Serialize(data, new JsonSerializerOptions
         {
             WriteIndented = true,
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping

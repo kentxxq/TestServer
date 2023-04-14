@@ -30,10 +30,10 @@ public class IPController : ControllerBase
     [HttpGet]
     public async Task<IpServiceModel> VisitorInfo()
     {
-        var result = await _ipService.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? ""); 
+        var result = await _ipService.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "");
         return result;
     }
-    
+
     /// <summary>
     /// 查看特定的ip信息
     /// </summary>

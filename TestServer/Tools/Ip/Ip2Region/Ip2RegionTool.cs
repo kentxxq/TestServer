@@ -18,7 +18,8 @@ public static class Ip2RegionTool
         var data = search.Search(ip);
         if (string.IsNullOrEmpty(data)) throw new ApplicationException($"Ip2Region没有{ip}信息");
         var dataList = data.Split("|");
-        var result = new IpServiceModel {
+        var result = new IpServiceModel
+        {
             Status = "success",
             Country = dataList[0],
             RegionName = dataList[2],
