@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using System.Net.Mime;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,12 @@ public class RequestController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+    [HttpPost]
+    [HttpDelete]
+    [HttpPut]
+    [HttpHead]
+    [HttpPatch]
+    [HttpOptions]
     public async Task<string> ReturnRequestInfo()
     {
         Dictionary<string, object> data = new();
@@ -39,12 +46,26 @@ public class RequestController : Controller
         if (!string.IsNullOrEmpty(requestBody))
         {
             data.Add("body",requestBody);
+            // if (headers["Content-Type"] == "application/json")
+            // {
+            //     var json = JsonSerializer.Serialize(JsonDocument.Parse(requestBody).RootElement, new JsonSerializerOptions
+            //     {
+            //         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            //         WriteIndented = false
+            //     });
+            //     data.Add("body",json);
+            // }
+            // else
+            // {
+            //     data.Add("body",requestBody);
+            // }
         }
 
         return JsonSerializer.Serialize(data, new JsonSerializerOptions
         {
             WriteIndented = true,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            
         });
     }
 }
