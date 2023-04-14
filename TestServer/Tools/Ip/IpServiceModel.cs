@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TestServer.Tools.Ip.Models;
+namespace TestServer.Tools.Ip;
 
 /// <summary>
 /// ip服务模型

@@ -1,18 +1,7 @@
-﻿using TestServer.Tools.Ip.Models;
+﻿namespace TestServer.Tools.Ip.IpApi;
 
-namespace TestServer.Tools.Ip;
-
-/// <summary>
-/// 获取ip信息的静态类
-/// </summary>
-public static class IPInfo
+public static class IpApiTool
 {
-    /// <summary>
-    /// 通过ip-api域名获取ip信息
-    /// </summary>
-    /// <param name="ip"></param>
-    /// <returns></returns>
-    /// <exception cref="ApplicationException"></exception>
     public static async Task<IpServiceModel> GetIpInfo(string ip)
     {
         var httpClient = new HttpClient();

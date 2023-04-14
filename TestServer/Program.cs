@@ -1,4 +1,5 @@
 using System.Reflection;
+using IP2Region.Net.XDB;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -24,7 +25,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddGrpc();
-
+    builder.Services.AddSingleton<ISearcher,Searcher>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMySwagger();
@@ -34,6 +35,8 @@ try
         // 允许非本机ip转发 options.KnownProxies.Add(IPAddress.Parse("127.0.10.1"));
         // 允许非规范header头 options.ForwardedForHeaderName = "X-Forwarded-For-My-Custom-Header-Name";
     });
+
+    builder.Services.AddTransient<IpService>();
 
     var app = builder.Build();
     

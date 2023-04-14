@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TestServer.Service;
 using TestServer.Tools.Ip;
-using TestServer.Tools.Ip.Models;
+using TestServer.Tools.Ip.IpApi;
 
 namespace TestServer.Controllers;
 
@@ -12,6 +13,13 @@ namespace TestServer.Controllers;
 [Route("[controller]")]
 public class IPController : ControllerBase
 {
+    private readonly IpService _ipService;
+
+    public IPController(IpService ipService)
+    {
+        _ipService = ipService;
+    }
+
     /// <summary>
     /// 访问者的ip信息
     /// </summary>
@@ -19,7 +27,7 @@ public class IPController : ControllerBase
     [HttpGet]
     public async Task<IpServiceModel> VisitorInfo()
     {
-        var result = await IPInfo.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "");
+        var result = await _ipService.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? ""); 
         return result;
     }
     
@@ -30,7 +38,7 @@ public class IPController : ControllerBase
     [HttpGet("{ip?}")]
     public async Task<IpServiceModel> IpInfo(string ip)
     {
-        var result = await IPInfo.GetIpInfo(ip);
+        var result = await _ipService.GetIpInfo(ip);
         return result;
     }
 }
