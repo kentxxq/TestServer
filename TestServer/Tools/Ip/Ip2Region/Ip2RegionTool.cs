@@ -21,6 +21,7 @@ public static class Ip2RegionTool
         var result = new IpServiceModel
         {
             Status = "success",
+            IP = ip,
             Country = dataList[0],
             RegionName = dataList[2],
             Isp = dataList[4],

@@ -12,6 +12,12 @@ public class IpServiceModel
     /// </summary>
     [JsonPropertyName("status")]
     public string Status { get; set; } = null!;
+    
+    /// <summary>
+    /// ip
+    /// </summary>
+    [JsonPropertyName("ip")]
+    public string IP { get; set; } = null!;
 
     /// <summary>
     /// 国家名称

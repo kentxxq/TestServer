@@ -18,7 +18,12 @@ public static class IpApiTool
         if (data!.Status != "success") throw new ApplicationException("查询失败");
         var result = new IpServiceModel
         {
-            Status = data.Status, Country = data.Country, RegionName = data.RegionName, Isp = data.Isp, City = data.City
+            Status = data.Status,
+            IP = ip,
+            Country = data.Country, 
+            RegionName = data.RegionName, 
+            Isp = data.Isp, 
+            City = data.City
         };
         return result;
     }
