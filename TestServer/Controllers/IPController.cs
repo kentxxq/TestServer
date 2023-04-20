@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using TestServer.Service;
-using TestServer.Tools.Ip;
+using TestServer.Tools;
 
 namespace TestServer.Controllers;
 
@@ -28,10 +29,10 @@ public class IPController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IpServiceModel> VisitorInfo()
+    public async Task<string> VisitorInfo()
     {
         var result = await _ipService.GetIpInfo(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "");
-        return result;
+        return JsonSerializer.Serialize(result,StaticData.PrettyPrintJsonSerializerOptions);
     }
 
     /// <summary>
@@ -39,9 +40,9 @@ public class IPController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("{ip?}")]
-    public async Task<IpServiceModel> IpInfo(string ip)
+    public async Task<string> IpInfo(string ip)
     {
         var result = await _ipService.GetIpInfo(ip);
-        return result;
+        return JsonSerializer.Serialize(result,StaticData.PrettyPrintJsonSerializerOptions);
     }
 }
