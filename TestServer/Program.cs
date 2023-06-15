@@ -8,11 +8,15 @@ using Serilog.Sinks.SystemConsole.Themes;
 using TestServer.Extensions;
 using TestServer.Service;
 
-const string logTemplate = "{Timestamp:HH:mm:ss}|{Level:u3}|{SourceContext}|{Message:lj}{Exception}{NewLine}";
+// 时间、时区 | 级别 | SourceContext | 线程名称 | 线程id | 信息/异常 
+// 2023-06-15 21:39:48.254 +08:00|INF|Serilog.AspNetCore.RequestLoggingMiddleware|.NET ThreadPool Worker|11|HTTP GET /Counter/Count responded 200 in 0.2160 ms
+const string logTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    // .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
     .Enrich.FromLogContext()
+    .Enrich.WithThreadId()
+    .Enrich.WithThreadName()
     .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
     .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
         rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1)
