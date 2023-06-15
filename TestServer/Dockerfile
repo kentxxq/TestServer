@@ -16,5 +16,5 @@ RUN dotnet publish "TestServer/TestServer.csproj" -c Release -o /app/publish /p:
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app/publish /app
 ENTRYPOINT ["dotnet", "TestServer.dll"]
