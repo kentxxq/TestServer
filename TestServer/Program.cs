@@ -23,8 +23,9 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Host.UseSerilog();
+    
     builder.Services.AddGrpc();
-    builder.Services.AddSerilog();
     builder.Services.AddSingleton<ISearcher, Searcher>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
