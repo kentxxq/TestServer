@@ -9,7 +9,6 @@ namespace TestServer.Service;
 /// </summary>
 public class IpService
 {
-    private static readonly IpServiceModel QueryFailed = new() { Status = "failed" };
     private readonly ILogger<IpService> _logger;
 
     /// <summary>
@@ -42,7 +41,7 @@ public class IpService
         catch (Exception e)
         {
             _logger.LogError("查询{IP}信息失败：{EMessage}", ip, e.Message);
-            return QueryFailed;
+            return new IpServiceModel{Status = "failed",IP = ip};
         }
     }
 }

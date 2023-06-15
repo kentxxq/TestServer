@@ -8,10 +8,10 @@ using Serilog.Sinks.SystemConsole.Themes;
 using TestServer.Extensions;
 using TestServer.Service;
 
-var logTemplate = "{Timestamp:HH:mm:ss}|{Level:u3}|{SourceContext}|{Message:lj}{Exception}{NewLine}";
+const string logTemplate = "{Timestamp:HH:mm:ss}|{Level:u3}|{SourceContext}|{Message:lj}{Exception}{NewLine}";
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
     .Enrich.FromLogContext()
     .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
     .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
@@ -24,6 +24,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddGrpc();
+    builder.Services.AddSerilog();
     builder.Services.AddSingleton<ISearcher, Searcher>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
@@ -50,8 +51,10 @@ try
     app.Lifetime.ApplicationStopped.Register(() => { Log.Warning("ApplicationStopped:应用已停止"); });
 
     #endregion
+    
+    // 简化http输出
+    app.UseSerilogRequestLogging();
 
-    // Configure the HTTP request pipeline.
     app.UseForwardedHeaders();
 
     app.UseSwagger();
