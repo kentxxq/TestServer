@@ -12,8 +12,7 @@ namespace TestServer.Controllers;
 public class WebSocketController : ControllerBase
 {
     private readonly ILogger<WebSocketController> _logger;
-
-
+    
     /// <inheritdoc />
     public WebSocketController(ILogger<WebSocketController> logger)
     {
