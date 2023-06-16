@@ -14,6 +14,8 @@ const string logTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .Enrich.When(logEvent=>!logEvent.Properties.ContainsKey("SourceContext"),enrichmentConfig=>enrichmentConfig.WithProperty("SourceContext","SourceContext"))
+    .Enrich.When(logEvent=>!logEvent.Properties.ContainsKey("ThreadName"),enrichmentConfig=>enrichmentConfig.WithProperty("ThreadName","ThreadName"))
     .Enrich.FromLogContext()
     .Enrich.WithThreadId()
     .Enrich.WithThreadName()
