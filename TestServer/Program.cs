@@ -19,9 +19,12 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .Enrich.WithThreadId()
     .Enrich.WithThreadName()
-    .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
-    .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
-        rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1)
+    .WriteTo.Async(l=>l.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
+        rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1))
+    .WriteTo.Async(l=>l.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code))
+    // .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
+    // .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
+    //     rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1)
     .CreateLogger();
 Log.Information("启动中...");
 

@@ -45,6 +45,15 @@
           "Serilog": "2.3.0"
         }
       },
+      "Serilog.Sinks.Async": {
+        "type": "Direct",
+        "requested": "[1.5.0, )",
+        "resolved": "1.5.0",
+        "contentHash": "csHYIqAwI4Gy9oAhXYRwxGrQEAtBg3Ep7WaCzsnA1cZuBZjVAU0n7hWaJhItjO7hbLHh/9gRVxALCUB4Dv+gZw==",
+        "dependencies": {
+          "Serilog": "2.9.0"
+        }
+      },
       "Swashbuckle.AspNetCore": {
         "type": "Direct",
         "requested": "[6.5.0, )",
