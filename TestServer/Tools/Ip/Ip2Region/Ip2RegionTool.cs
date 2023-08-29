@@ -14,7 +14,7 @@ public static class Ip2RegionTool
     /// <returns></returns>
     public static IpServiceModel GetIpInfo(string ip)
     {
-        var search = new Searcher();
+        var search = new Searcher(CachePolicy.Content,"ip2region.xdb");
         var data = search.Search(ip);
         if (string.IsNullOrEmpty(data)) throw new ApplicationException($"Ip2Region没有{ip}信息");
         var dataList = data.Split("|");

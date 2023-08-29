@@ -1,4 +1,5 @@
 using System.Reflection;
+using IP2Region.Net.Abstractions;
 using IP2Region.Net.XDB;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
@@ -35,7 +36,7 @@ try
     builder.Host.UseSerilog();
     
     builder.Services.AddGrpc();
-    builder.Services.AddSingleton<ISearcher, Searcher>();
+    builder.Services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content , "ip2region.xdb"));
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMySwagger();
