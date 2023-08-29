@@ -1,12 +1,12 @@
 ﻿namespace TestServer.Tools.Ip.IpApi;
 
 /// <summary>
-/// ip-api工具
+///     ip-api工具
 /// </summary>
 public static class IpApiTool
 {
     /// <summary>
-    /// 获取ip信息
+    ///     获取ip信息
     /// </summary>
     /// <param name="ip"></param>
     /// <returns></returns>
@@ -20,9 +20,9 @@ public static class IpApiTool
         {
             Status = data.Status,
             IP = ip,
-            Country = data.Country, 
-            RegionName = data.RegionName, 
-            Isp = data.Isp, 
+            Country = data.Country,
+            RegionName = data.RegionName,
+            Isp = data.Isp,
             City = data.City
         };
         return result;

@@ -3,12 +3,12 @@
 namespace TestServer.Extensions;
 
 /// <summary>
-/// swagger-拓展方法
+///     swagger-拓展方法
 /// </summary>
 public static class MySwaggerExtension
 {
     /// <summary>
-    /// 添加swagger配置
+    ///     添加swagger配置
     /// </summary>
     /// <param name="service"></param>
     /// <returns></returns>

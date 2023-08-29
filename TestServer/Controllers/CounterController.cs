@@ -3,7 +3,7 @@
 namespace TestServer.Controllers;
 
 /// <summary>
-/// counter控制器
+///     counter控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
@@ -13,7 +13,7 @@ public class CounterController : ControllerBase
     private static int _count;
 
     /// <summary>
-    /// +1
+    ///     +1
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -24,7 +24,7 @@ public class CounterController : ControllerBase
     }
 
     /// <summary>
-    /// 重置计数器
+    ///     重置计数器
     /// </summary>
     /// <returns></returns>
     [HttpGet]

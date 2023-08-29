@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TestServer.Controllers;
 
 /// <summary>
-/// request控制器
+///     request控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
@@ -13,7 +13,7 @@ namespace TestServer.Controllers;
 public class RequestController : Controller
 {
     /// <summary>
-    /// 返回请求的相关信息
+    ///     返回请求的相关信息
     /// </summary>
     /// <returns></returns>
     [HttpGet]

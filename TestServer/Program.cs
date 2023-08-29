@@ -11,18 +11,22 @@ using TestServer.Service;
 
 // 时间、时区 | 级别 | SourceContext | 线程名称 | 线程id | 信息/异常 
 // 2023-06-15 21:39:48.254 +08:00|INF|Serilog.AspNetCore.RequestLoggingMiddleware|.NET ThreadPool Worker|11|HTTP GET /Counter/Count responded 200 in 0.2160 ms
-const string logTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
+const string logTemplate =
+    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-    .Enrich.When(logEvent=>!logEvent.Properties.ContainsKey("SourceContext"),enrichmentConfig=>enrichmentConfig.WithProperty("SourceContext","SourceContext"))
-    .Enrich.When(logEvent=>!logEvent.Properties.ContainsKey("ThreadName"),enrichmentConfig=>enrichmentConfig.WithProperty("ThreadName","ThreadName"))
+    .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("SourceContext"),
+        enrichmentConfig => enrichmentConfig.WithProperty("SourceContext", "SourceContext"))
+    .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("ThreadName"),
+        enrichmentConfig => enrichmentConfig.WithProperty("ThreadName", "ThreadName"))
     .Enrich.FromLogContext()
     .Enrich.WithThreadId()
     .Enrich.WithThreadName()
-    .WriteTo.Async(l=>l.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
+    .WriteTo.Async(l => l.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log",
+        formatter: new JsonFormatter(),
         rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1))
-    .WriteTo.Async(l=>l.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code))
+    .WriteTo.Async(l => l.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code))
     // .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
     // .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
     //     rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1)
@@ -34,9 +38,10 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog();
-    
+
     builder.Services.AddGrpc();
-    builder.Services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content , "ip2region.xdb"));
+    builder.Services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content,
+        Path.Combine(AppContext.BaseDirectory, "ip2region.xdb")));
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMySwagger();
@@ -62,7 +67,7 @@ try
     app.Lifetime.ApplicationStopped.Register(() => { Log.Warning("ApplicationStopped:应用已停止"); });
 
     #endregion
-    
+
     // 简化http输出
     app.UseSerilogRequestLogging();
 

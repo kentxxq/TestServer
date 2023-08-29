@@ -3,7 +3,7 @@
 namespace TestServer.Controllers;
 
 /// <summary>
-/// counter控制器
+///     counter控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
@@ -19,7 +19,7 @@ public class LogController : ControllerBase
     }
 
     /// <summary>
-    /// 记录特定条数的日志
+    ///     记录特定条数的日志
     /// </summary>
     /// <param name="count"></param>
     /// <returns></returns>
@@ -27,10 +27,7 @@ public class LogController : ControllerBase
     public string LogNum(int count)
     {
         _logger.LogInformation($"收到请求，记录{count}次日志");
-        for (var i = 1; i < count+1; i++)
-        {
-            _logger.LogInformation($"这是第{i}条记录");
-        }
+        for (var i = 1; i < count + 1; i++) _logger.LogInformation($"这是第{i}条记录");
 
         return $"已记录{count}条日志";
     }

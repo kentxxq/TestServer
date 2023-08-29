@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Swagger;
 namespace TestServer.Controllers;
 
 /// <summary>
-/// index控制器
+///     index控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
@@ -15,7 +15,7 @@ public class IndexController : ControllerBase
     private readonly ISwaggerProvider _swaggerProvider;
 
     /// <summary>
-    /// 数据
+    ///     数据
     /// </summary>
     /// <param name="swaggerProvider"></param>
     public IndexController(ISwaggerProvider swaggerProvider)
@@ -24,7 +24,7 @@ public class IndexController : ControllerBase
     }
 
     /// <summary>
-    /// 返回需要swagger的简要信息
+    ///     返回需要swagger的简要信息
     /// </summary>
     /// <returns></returns>
     [HttpGet("/")]

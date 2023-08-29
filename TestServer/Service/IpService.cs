@@ -5,14 +5,14 @@ using TestServer.Tools.Ip.IpApi;
 namespace TestServer.Service;
 
 /// <summary>
-/// ip服务
+///     ip服务
 /// </summary>
 public class IpService
 {
     private readonly ILogger<IpService> _logger;
 
     /// <summary>
-    /// 依赖注入
+    ///     依赖注入
     /// </summary>
     /// <param name="logger"></param>
     public IpService(ILogger<IpService> logger)
@@ -21,7 +21,7 @@ public class IpService
     }
 
     /// <summary>
-    /// 获取ip信息
+    ///     获取ip信息
     /// </summary>
     /// <param name="ip"></param>
     /// <returns></returns>
@@ -41,7 +41,7 @@ public class IpService
         catch (Exception e)
         {
             _logger.LogError("查询{IP}信息失败：{EMessage}", ip, e.Message);
-            return new IpServiceModel{Status = "failed",IP = ip};
+            return new IpServiceModel { Status = "failed", IP = ip };
         }
     }
 }

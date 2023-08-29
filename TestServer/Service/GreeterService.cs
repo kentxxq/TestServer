@@ -4,12 +4,12 @@ using GrpcGreeter;
 namespace TestServer.Service;
 
 /// <summary>
-/// 演示greeter-GRPC
+///     演示greeter-GRPC
 /// </summary>
 public class GreeterService : Greeter.GreeterBase
 {
     /// <summary>
-    /// 响应hello请求
+    ///     响应hello请求
     /// </summary>
     /// <param name="request"></param>
     /// <param name="context"></param>

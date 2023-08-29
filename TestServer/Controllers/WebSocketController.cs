@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TestServer.Controllers;
 
 /// <summary>
-/// websocket控制器
+///     websocket控制器
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
@@ -12,7 +12,7 @@ namespace TestServer.Controllers;
 public class WebSocketController : ControllerBase
 {
     private readonly ILogger<WebSocketController> _logger;
-    
+
     /// <inheritdoc />
     public WebSocketController(ILogger<WebSocketController> logger)
     {
@@ -20,7 +20,7 @@ public class WebSocketController : ControllerBase
     }
 
     /// <summary>
-    /// 连接websocket
+    ///     连接websocket
     /// </summary>
     [HttpGet]
     public async Task<string> Echo()

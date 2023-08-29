@@ -13,28 +13,34 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.56.0" />
-        <PackageReference Include="IP2Region.Net" Version="2.0.1" />
-        <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
-        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-        <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.56.0"/>
+        <PackageReference Include="IP2Region.Net" Version="2.0.1"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="7.0.0"/>
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0"/>
+        <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="Proto\greet.proto" GrpcServices="Server" />
+        <Protobuf Include="Proto\greet.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
-    
-    <ItemGroup>
-        <None Update="ip2region.xdb">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+
+    <PropertyGroup>
+        <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
+    </PropertyGroup>
+
+    <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
+        <DownloadFile
+                SourceUrl="$(ip2regionDB)"
+                DestinationFolder="$(OutputPath)">
+            <Output TaskParameter="DownloadedFile" ItemName="Content"/>
+        </DownloadFile>
+    </Target>
 
 </Project>

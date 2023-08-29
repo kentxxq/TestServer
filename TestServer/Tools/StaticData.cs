@@ -4,14 +4,14 @@ using System.Text.Json;
 namespace TestServer.Tools;
 
 /// <summary>
-/// 静态数据
+///     静态数据
 /// </summary>
 public static class StaticData
 {
     /// <summary>
-    /// 友好打印
+    ///     友好打印
     /// </summary>
-    public static readonly JsonSerializerOptions PrettyPrintJsonSerializerOptions = new JsonSerializerOptions
+    public static readonly JsonSerializerOptions PrettyPrintJsonSerializerOptions = new()
     {
         WriteIndented = true,
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
