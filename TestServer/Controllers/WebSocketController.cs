@@ -13,7 +13,7 @@ public class WebSocketController : ControllerBase
 {
     private readonly ILogger<WebSocketController> _logger;
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public WebSocketController(ILogger<WebSocketController> logger)
     {
         _logger = logger;

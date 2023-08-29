@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using TestServer.Service;
 
 namespace TestServer.Tools.Ip;
 
@@ -11,7 +12,7 @@ public class IpServiceModel
     ///     查询状态
     /// </summary>
     [JsonPropertyName("status")]
-    public string Status { get; set; } = null!;
+    public IpServiceQueryStatus Status { get; set; }
 
     /// <summary>
     ///     ip

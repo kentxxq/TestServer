@@ -1,4 +1,5 @@
 using IP2Region.Net.XDB;
+using TestServer.Service;
 
 namespace TestServer.Tools.Ip.Ip2Region;
 
@@ -20,7 +21,7 @@ public static class Ip2RegionTool
         var dataList = data.Split("|");
         var result = new IpServiceModel
         {
-            Status = "success",
+            Status = IpServiceQueryStatus.success,
             IP = ip,
             Country = dataList[0],
             RegionName = dataList[2],

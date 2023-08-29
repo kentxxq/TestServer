@@ -1,4 +1,6 @@
-﻿namespace TestServer.Tools.Ip.IpApi;
+﻿using TestServer.Service;
+
+namespace TestServer.Tools.Ip.IpApi;
 
 /// <summary>
 ///     ip-api工具
@@ -19,7 +21,7 @@ public static class IpApiTool
         if (data!.Status != "success") throw new ApplicationException("查询失败");
         var result = new IpServiceModel
         {
-            Status = data.Status,
+            Status = IpServiceQueryStatus.success,
             IP = ip,
             Country = data.Country,
             RegionName = data.RegionName,
