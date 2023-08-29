@@ -14,6 +14,7 @@ public static class IpApiTool
     public static async Task<IpServiceModel> GetIpInfo(string ip)
     {
         var httpClient = new HttpClient();
+        httpClient.Timeout = TimeSpan.FromSeconds(5);
         var data = await httpClient.GetFromJsonAsync<IpApiModel>($"http://ip-api.com/json/{ip}?lang=zh-CN");
         if (data!.Status != "success") throw new ApplicationException("查询失败");
         var result = new IpServiceModel
