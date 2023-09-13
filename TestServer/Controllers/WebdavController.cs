@@ -29,6 +29,8 @@ public class WebdavController : ControllerBase
         var client = new WebDavClient(clientParams);
         var stream = await client.GetRawFile(webdavInfo.FilePath);
         Response.Headers.Add("Content-Disposition", $"attachment; filename={Path.GetFileName(webdavInfo.FilePath)}");
-        return new FileStreamResult(stream.Stream, "application/octet-stream");
+        // clash必须是text/plain,不能是 流+chunk 形式
+        // return new FileStreamResult(stream.Stream, "application/octet-stream");
+        return File(stream.Stream, "text/plain");
     }
 }
