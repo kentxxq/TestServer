@@ -2,8 +2,8 @@
 
 public class WebdavInfo
 {
-    public string Server { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string FilePath { get; set; }
+    public string Server { get; set; } = null!;
+    public string Username { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string FilePath { get; set; } = null!;
 }

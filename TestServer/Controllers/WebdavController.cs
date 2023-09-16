@@ -5,17 +5,13 @@ using WebDav;
 
 namespace TestServer.Controllers;
 
-/// <summary>
-///     delay控制器
-/// </summary>
+/// <summary>delay控制器</summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
 [Route("[controller]")]
 public class WebdavController : ControllerBase
 {
-    /// <summary>
-    ///     获取特定webdav文件
-    /// </summary>
+    /// <summary>获取特定webdav文件</summary>
     /// <param name="webdavInfo">webdav的文件信息</param>
     /// <returns></returns>
     [HttpGet]

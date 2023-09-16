@@ -4,27 +4,21 @@ using TestServer.Tools.Ip.IpApi;
 
 namespace TestServer.Service;
 
-/// <summary>
-///     ip服务
-/// </summary>
+/// <summary>ip服务</summary>
 public class IpService
 {
     private readonly ILogger<IpService> _logger;
     private readonly List<string> ChinaStrings = new() { "中国", "CHINA", "china", "CN", "cn" };
 
 
-    /// <summary>
-    ///     依赖注入
-    /// </summary>
+    /// <summary>依赖注入</summary>
     /// <param name="logger"></param>
     public IpService(ILogger<IpService> logger)
     {
         _logger = logger;
     }
 
-    /// <summary>
-    ///     获取ip信息
-    /// </summary>
+    /// <summary>获取ip信息</summary>
     /// <param name="ip"></param>
     /// <returns></returns>
     public async Task<IpServiceModel> GetIpInfo(string ip)
@@ -48,9 +42,7 @@ public class IpService
     }
 
 
-    /// <summary>
-    ///     特定ip是否在国内
-    /// </summary>
+    /// <summary>特定ip是否在国内</summary>
     /// <param name="ip"></param>
     /// <returns></returns>
     public async Task<bool> InChina(string ip)

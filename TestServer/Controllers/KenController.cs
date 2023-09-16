@@ -3,9 +3,7 @@ using TestServer.Service;
 
 namespace TestServer.Controllers;
 
-/// <summary>
-///     ken控制器
-/// </summary>
+/// <summary>ken控制器</summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
 [Route("[controller]")]
@@ -29,9 +27,7 @@ public class KenController : ControllerBase
         _ipService = ipService;
     }
 
-    /// <summary>
-    ///     列出所有的平台版本
-    /// </summary>
+    /// <summary>列出所有的平台版本</summary>
     /// <returns></returns>
     [HttpGet]
     public string ListPlatform()
@@ -40,9 +36,7 @@ public class KenController : ControllerBase
     }
 
 
-    /// <summary>
-    ///     跳转到特定的版本
-    /// </summary>
+    /// <summary>跳转到特定的版本</summary>
     /// <returns></returns>
     [HttpGet("{name?}")]
     public async Task<IActionResult> DownloadRedirect(string name)

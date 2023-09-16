@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestServer.Controllers;
 
-/// <summary>
-///     websocket控制器
-/// </summary>
+/// <summary>websocket控制器</summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
 [Route("[controller]/[action]")]
@@ -19,9 +17,7 @@ public class WebSocketController : ControllerBase
         _logger = logger;
     }
 
-    /// <summary>
-    ///     连接websocket
-    /// </summary>
+    /// <summary>连接websocket</summary>
     [HttpGet]
     public async Task<string> Echo()
     {

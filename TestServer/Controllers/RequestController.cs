@@ -4,17 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestServer.Controllers;
 
-/// <summary>
-///     request控制器
-/// </summary>
+/// <summary>request控制器</summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]
 [Route("[controller]")]
 public class RequestController : Controller
 {
-    /// <summary>
-    ///     返回请求的相关信息
-    /// </summary>
+    /// <summary>返回请求的相关信息</summary>
     /// <returns></returns>
     [HttpGet]
     [HttpPost]
@@ -28,7 +24,10 @@ public class RequestController : Controller
         Dictionary<string, object> data = new();
 
         var headers = HttpContext.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString());
-        if (headers.Count > 0) data.Add("Headers", headers);
+        if (headers.Count > 0)
+        {
+            data.Add("Headers", headers);
+        }
 
         data.Add("method", HttpContext.Request.Method);
         data.Add("schema", HttpContext.Request.Scheme);
@@ -42,7 +41,10 @@ public class RequestController : Controller
         using var reader = new StreamReader(HttpContext.Request.Body);
         var requestBody = await reader.ReadToEndAsync();
 
-        if (!string.IsNullOrEmpty(requestBody)) data.Add("body", requestBody);
+        if (!string.IsNullOrEmpty(requestBody))
+        {
+            data.Add("body", requestBody);
+        }
 
         // if (!string.IsNullOrEmpty(requestBody))
         // {
