@@ -38,10 +38,10 @@
     <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
   </PropertyGroup>
 
-  <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
+  <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
     <DownloadFile
       SourceUrl="$(ip2regionDB)"
-      DestinationFolder="$(OutputPath)">
+      DestinationFolder="$(PublishDir)">
       <Output TaskParameter="DownloadedFile" ItemName="Content"/>
     </DownloadFile>
   </Target>
