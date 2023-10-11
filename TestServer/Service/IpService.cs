@@ -27,6 +27,7 @@ public class IpService
     /// <returns></returns>
     public async Task<IpServiceModel> GetIpInfo(string ip)
     {
+        IpServiceModel result;
         try
         {
             if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) < TimeSpan.FromHours(1))
@@ -35,16 +36,17 @@ public class IpService
                     $"从{_globalVar.IpApiErrorTime:yyyy-MM-dd HH:mm:ss}开始1小时内不再尝试请求ip-api.com");
             }
 
-            var result = await IpApiTool.GetIpInfo(ip);
+            result = await IpApiTool.GetIpInfo(ip);
             return result;
         }
         catch (Exception e)
         {
             _globalVar.IpApiErrorTime = DateTime.Now;
             _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
-            var result = Ip2RegionTool.GetIpInfo(ip);
-            return result;
         }
+
+        result = Ip2RegionTool.GetIpInfo(ip);
+        return result;
     }
 
 
