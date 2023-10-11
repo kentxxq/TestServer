@@ -28,24 +28,26 @@ public class IpService
     public async Task<IpServiceModel> GetIpInfo(string ip)
     {
         IpServiceModel result;
-        try
+        if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) < TimeSpan.FromHours(1))
         {
-            if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) < TimeSpan.FromHours(1))
+            _logger.LogWarning($"从{_globalVar.IpApiErrorTime:yyyy-MM-dd HH:mm:ss}开始1小时内不再尝试请求ip-api.com");
+            result = Ip2RegionTool.GetIpInfo(ip);
+        }
+        else
+        {
+            try
             {
-                throw new TaskCanceledException(
-                    $"从{_globalVar.IpApiErrorTime:yyyy-MM-dd HH:mm:ss}开始1小时内不再尝试请求ip-api.com");
+                result = await IpApiTool.GetIpInfo(ip);
+                return result;
             }
-
-            result = await IpApiTool.GetIpInfo(ip);
-            return result;
-        }
-        catch (Exception e)
-        {
-            _globalVar.IpApiErrorTime = DateTime.Now;
-            _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
+            catch (Exception e)
+            {
+                _globalVar.IpApiErrorTime = DateTime.Now;
+                _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
+                result = Ip2RegionTool.GetIpInfo(ip);
+            }
         }
 
-        result = Ip2RegionTool.GetIpInfo(ip);
         return result;
     }
 
