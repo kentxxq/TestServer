@@ -56,7 +56,7 @@ try
     // ip服务
     builder.Services.AddTransient<IpService>();
     // 全局变量
-    builder.Services.AddSingleton<GloablVar>();
+    builder.Services.AddSingleton<GlobalVar>();
 
     var app = builder.Build();
 

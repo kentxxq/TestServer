@@ -8,15 +8,15 @@ namespace TestServer.Service;
 /// <summary>ip服务</summary>
 public class IpService
 {
-    private readonly GloablVar _globalVar;
+    private readonly GlobalVar _globalVar;
     private readonly ILogger<IpService> _logger;
     private readonly List<string> ChinaStrings = new() { "中国", "CHINA", "china", "CN", "cn" };
 
 
     /// <summary>依赖注入</summary>
     /// <param name="logger"></param>
-    /// <param name="gloablVar"></param>
-    public IpService(ILogger<IpService> logger, GloablVar globalVar)
+    /// <param name="globalVar"></param>
+    public IpService(ILogger<IpService> logger, GlobalVar globalVar)
     {
         _logger = logger;
         _globalVar = globalVar;
