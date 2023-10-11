@@ -31,23 +31,19 @@ public class IpService
         {
             if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) < TimeSpan.FromHours(1))
             {
-                throw new TaskCanceledException($"从{_globalVar.IpApiErrorTime}开始1小时内不再尝试请求ip-api.com");
+                throw new TaskCanceledException(
+                    $"从{_globalVar.IpApiErrorTime:yyyy-MM-dd HH:mm:ss}开始1小时内不再尝试请求ip-api.com");
             }
 
             var result = await IpApiTool.GetIpInfo(ip);
             return result;
         }
-        catch (TaskCanceledException e)
+        catch (Exception e)
         {
             _globalVar.IpApiErrorTime = DateTime.Now;
             _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
             var result = Ip2RegionTool.GetIpInfo(ip);
             return result;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("查询{IP}信息失败：{EMessage}", ip, e.Message);
-            return new IpServiceModel { Status = IpServiceQueryStatus.fail, IP = ip };
         }
     }
 

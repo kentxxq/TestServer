@@ -13,21 +13,33 @@ public static class Ip2RegionTool
     {
         var search = new Searcher(CachePolicy.Content, "ip2region.xdb");
         var data = search.Search(ip);
-        if (string.IsNullOrEmpty(data))
+        IpServiceModel result;
+        if (!string.IsNullOrEmpty(data))
         {
-            throw new ApplicationException($"Ip2Region没有{ip}信息");
+            var dataList = data.Split("|");
+            result = new IpServiceModel
+            {
+                Status = IpServiceQueryStatus.success,
+                IP = ip,
+                Country = dataList[0],
+                RegionName = dataList[2],
+                Isp = dataList[4],
+                City = dataList[3]
+            };
+        }
+        else
+        {
+            result = new IpServiceModel
+            {
+                Status = IpServiceQueryStatus.fail,
+                IP = ip,
+                Country = string.Empty,
+                RegionName = string.Empty,
+                Isp = string.Empty,
+                City = string.Empty
+            };
         }
 
-        var dataList = data.Split("|");
-        var result = new IpServiceModel
-        {
-            Status = IpServiceQueryStatus.success,
-            IP = ip,
-            Country = dataList[0],
-            RegionName = dataList[2],
-            Isp = dataList[4],
-            City = dataList[3]
-        };
         return result;
     }
 }
