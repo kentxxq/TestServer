@@ -28,7 +28,7 @@ public class IpService
             var result = await IpApiTool.GetIpInfo(ip);
             return result;
         }
-        catch (HttpRequestException e)
+        catch (TaskCanceledException e)
         {
             _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
             var result = Ip2RegionTool.GetIpInfo(ip);

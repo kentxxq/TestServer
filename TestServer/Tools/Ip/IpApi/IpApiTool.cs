@@ -18,7 +18,7 @@ public static class IpApiTool
         var data = await httpClient.GetFromJsonAsync<IpApiModel>($"http://ip-api.com/json/{ip}?lang=zh-CN");
         if (data!.Status != "success")
         {
-            throw new HttpRequestException("查询失败");
+            throw new TaskCanceledException("查询失败");
         }
 
         var result = new IpServiceModel
