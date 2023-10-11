@@ -29,7 +29,7 @@ public class IpService
     {
         try
         {
-            if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) > TimeSpan.FromHours(1))
+            if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) < TimeSpan.FromHours(1))
             {
                 throw new TaskCanceledException($"从{_globalVar.IpApiErrorTime}开始1小时内不再尝试请求ip-api.com");
             }
