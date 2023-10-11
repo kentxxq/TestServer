@@ -8,8 +8,9 @@ using Serilog.Formatting.Json;
 using Serilog.Sinks.SystemConsole.Themes;
 using TestServer.Extensions;
 using TestServer.Service;
+using TestServer.Tools;
 
-// 时间、时区 | 级别 | SourceContext | 线程名称 | 线程id | 信息/异常 
+// 时间、时区 | 级别 | SourceContext | 线程名称 | 线程id | 信息/异常
 // 2023-06-15 21:39:48.254 +08:00|INF|Serilog.AspNetCore.RequestLoggingMiddleware|.NET ThreadPool Worker|11|HTTP GET /Counter/Count responded 200 in 0.2160 ms
 const string logTemplate =
     "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
@@ -52,7 +53,10 @@ try
         // 允许非规范header头 options.ForwardedForHeaderName = "X-Forwarded-For-My-Custom-Header-Name";
     });
 
+    // ip服务
     builder.Services.AddTransient<IpService>();
+    // 全局变量
+    builder.Services.AddSingleton<GloablVar>();
 
     var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using TestServer.Tools.Ip;
+﻿using TestServer.Tools;
+using TestServer.Tools.Ip;
 using TestServer.Tools.Ip.Ip2Region;
 using TestServer.Tools.Ip.IpApi;
 
@@ -7,15 +8,18 @@ namespace TestServer.Service;
 /// <summary>ip服务</summary>
 public class IpService
 {
+    private readonly GloablVar _globalVar;
     private readonly ILogger<IpService> _logger;
     private readonly List<string> ChinaStrings = new() { "中国", "CHINA", "china", "CN", "cn" };
 
 
     /// <summary>依赖注入</summary>
     /// <param name="logger"></param>
-    public IpService(ILogger<IpService> logger)
+    /// <param name="gloablVar"></param>
+    public IpService(ILogger<IpService> logger, GloablVar globalVar)
     {
         _logger = logger;
+        _globalVar = globalVar;
     }
 
     /// <summary>获取ip信息</summary>
@@ -25,11 +29,17 @@ public class IpService
     {
         try
         {
+            if (DateTime.Now.Subtract(_globalVar.IpApiErrorTime) > TimeSpan.FromHours(1))
+            {
+                throw new TaskCanceledException($"从{_globalVar.IpApiErrorTime}开始1小时内不再尝试请求ip-api.com");
+            }
+
             var result = await IpApiTool.GetIpInfo(ip);
             return result;
         }
         catch (TaskCanceledException e)
         {
+            _globalVar.IpApiErrorTime = DateTime.Now;
             _logger.LogWarning("请求ip-api遇到网络问题:{EMessage}，改用ip2region", e.Message);
             var result = Ip2RegionTool.GetIpInfo(ip);
             return result;
