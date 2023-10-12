@@ -15,9 +15,9 @@
       },
       "IP2Region.Net": {
         "type": "Direct",
-        "requested": "[2.0.1, )",
-        "resolved": "2.0.1",
-        "contentHash": "BEnBcukdjLY298SO+RNnmVWqKWK2sV8cMmtg7Tv3Unr5Y/5J3G5SBiJCiewTOV8gC0xGPy1NQwQX6oFQamIUGQ=="
+        "requested": "[2.0.2, )",
+        "resolved": "2.0.2",
+        "contentHash": "vkxITIPkUdju0+vPm9FYU4+sBvvOkoM7GvPw8R81RYlbkKDwKAkO9P4vZvzeRJEC8SrYtMLcsDJizx+e/JnRmA=="
       },
       "Serilog.AspNetCore": {
         "type": "Direct",
