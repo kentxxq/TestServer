@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -35,7 +35,7 @@
 
 
   <PropertyGroup>
-    <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
+    <ip2regionDB>https://gh-proxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
   </PropertyGroup>
 
   <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
@@ -45,5 +45,15 @@
       <Output TaskParameter="DownloadedFile" ItemName="Content"/>
     </DownloadFile>
   </Target>
+
+  <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
+    <DownloadFile
+      SourceUrl="$(ip2regionDB)"
+      DestinationFolder="$(OutputPath)">
+      <Output TaskParameter="DownloadedFile" ItemName="Content"/>
+    </DownloadFile>
+  </Target>
+
+
 
 </Project>
