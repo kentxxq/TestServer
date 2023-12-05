@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using TestServer.RO;
 using WebDav;
@@ -24,7 +24,7 @@ public class WebdavController : ControllerBase
         };
         var client = new WebDavClient(clientParams);
         var stream = await client.GetRawFile(webdavInfo.FilePath);
-        Response.Headers.Add("Content-Disposition", $"attachment; filename={Path.GetFileName(webdavInfo.FilePath)}");
+        Response.Headers.Append("Content-Disposition", $"attachment; filename={Path.GetFileName(webdavInfo.FilePath)}");
         // clash必须是text/plain
         // return new FileStreamResult(stream.Stream, "application/octet-stream");
         return File(stream.Stream, "text/plain");
