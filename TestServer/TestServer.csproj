@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
     <PackageReference Include="IP2Region.Net" Version="2.0.2" />
-    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0"/>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0"/>
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0"/>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
@@ -35,7 +35,7 @@
 
 
   <PropertyGroup>
-    <ip2regionDB>https://gh-proxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
+    <ip2regionDB>https://mirror.ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
   </PropertyGroup>
 
   <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
