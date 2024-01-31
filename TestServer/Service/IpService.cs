@@ -38,6 +38,7 @@ public class IpService
             try
             {
                 result = await IpApiTool.GetIpInfo(ip);
+                _logger.LogInformation($"使用ip-api的验证结果");
                 return result;
             }
             catch (Exception e)
