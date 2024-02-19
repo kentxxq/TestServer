@@ -33,12 +33,11 @@
     </Content>
   </ItemGroup>
 
-
   <PropertyGroup>
     <ip2regionDB>https://mirror.ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
   </PropertyGroup>
 
-  <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
+  <Target Name="DownloadPublishDirFiles" AfterTargets="Publish" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
     <DownloadFile
       SourceUrl="$(ip2regionDB)"
       DestinationFolder="$(PublishDir)">
@@ -46,7 +45,7 @@
     </DownloadFile>
   </Target>
 
-  <Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
+  <Target Name="DownloadOutputPathFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
     <DownloadFile
       SourceUrl="$(ip2regionDB)"
       DestinationFolder="$(OutputPath)">
