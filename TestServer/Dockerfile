@@ -5,7 +5,8 @@
 #    ls
 ENV TZ=Asia/Shanghai
 WORKDIR /app
-ENV ASPNETCORE_HTTP_PORTS=5000
+# 去掉警告
+ENV ASPNETCORE_HTTP_PORTS=''
 EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
