@@ -3,7 +3,7 @@
 #RUN apt update -y && \
 #    apt install lftp ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
 #    ls
-ENV TZ=Asia/Shanghai
+#ENV TZ=Asia/Shanghai
 WORKDIR /app
 # 去掉警告
 ENV ASPNETCORE_HTTP_PORTS=''

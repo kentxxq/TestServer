@@ -4,6 +4,7 @@
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "swagger",
+      "workingDirectory": "$(OutputPath)",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
