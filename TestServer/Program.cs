@@ -57,6 +57,8 @@ try
     builder.Services.AddTransient<IpService>();
     // 全局变量
     builder.Services.AddSingleton<GlobalVar>();
+    // cpu负载服务
+    builder.Services.AddScoped<ICpuLoadService, MathCpuLoadService>();
 
     var app = builder.Build();
 
