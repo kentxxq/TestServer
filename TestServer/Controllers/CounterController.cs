@@ -13,18 +13,19 @@ public class CounterController : ControllerBase
     /// <summary>+1</summary>
     /// <returns></returns>
     [HttpGet]
-    public int Count()
+    public string Count()
     {
         _count++;
-        return _count;
+        // int会被改成json格式返回,而string不会
+        return _count.ToString();
     }
 
     /// <summary>重置计数器</summary>
     /// <returns></returns>
     [HttpGet]
-    public int Reset()
+    public string Reset()
     {
         _count = 0;
-        return _count;
+        return _count.ToString();
     }
 }
