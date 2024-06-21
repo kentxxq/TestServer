@@ -22,7 +22,13 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
-    var enableOpentelemetry = builder.Configuration.GetValue<bool>("EnableOpenTelemetry", false);
+    var enableOpentelemetry = builder.Configuration.GetValue("EnableOpenTelemetry", false);
+
+    if (enableOpentelemetry)
+    {
+        // opentelemetry采集,这里必须配置在log之前
+        builder.AddMyOpenTelemetry();
+    }
 
     builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
     {
@@ -31,8 +37,6 @@ try
         {
             loggerConfiguration.WriteTo.OpenTelemetry(builder.Configuration["OC_Endpoint"] ??
                                                        throw new InvalidOperationException("必须配置open telemetry的collector地址"));
-            // opentelemetry采集
-            builder.AddMyOpenTelemetry();
         }
     });
 
