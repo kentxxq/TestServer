@@ -22,12 +22,18 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
+    var enableOpentelemetry = builder.Configuration.GetValue<bool>("EnableOpenTelemetry", false);
+
     builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
     {
-        loggerConfiguration.AddCustomLogConfig(builder.Configuration)
-            // opentelemetry
-            .WriteTo.OpenTelemetry(builder.Configuration["OC_Endpoint"] ??
-                                   throw new InvalidOperationException("必须配置open telemetry的collector地址"));
+        loggerConfiguration.AddCustomLogConfig(builder.Configuration);
+        if (enableOpentelemetry)
+        {
+            loggerConfiguration.WriteTo.OpenTelemetry(builder.Configuration["OC_Endpoint"] ??
+                                                       throw new InvalidOperationException("必须配置open telemetry的collector地址"));
+            // opentelemetry采集
+            builder.AddMyOpenTelemetry();
+        }
     });
 
     builder.Services.AddGrpc();
@@ -49,8 +55,6 @@ try
     builder.Services.AddSingleton<GlobalVar>();
     // cpu负载服务
     builder.Services.AddScoped<ICpuLoadService, MathCpuLoadService>();
-    // opentelemetry采集
-    builder.AddMyOpenTelemetry();
 
     var app = builder.Build();
 
@@ -80,7 +84,12 @@ try
 
     app.UseSwagger();
     app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1"); });
-    app.UseOpenTelemetryPrometheusScrapingEndpoint();
+
+    if (enableOpentelemetry)
+    {
+        app.UseOpenTelemetryPrometheusScrapingEndpoint();
+    }
+
     app.UseRouting();
     app.UseAuthorization();
 
