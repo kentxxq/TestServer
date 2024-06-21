@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using IP2Region.Net.Abstractions;
 using IP2Region.Net.XDB;
@@ -5,40 +6,29 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
+using Serilog.Sinks.OpenTelemetry;
 using Serilog.Sinks.SystemConsole.Themes;
 using TestServer.Extensions;
 using TestServer.Service;
 using TestServer.Tools;
 
-// 时间、时区 | 级别 | SourceContext | 线程名称 | 线程id | 信息/异常
-// 2023-06-15 21:39:48.254 +08:00|INF|Serilog.AspNetCore.RequestLoggingMiddleware|.NET ThreadPool Worker|11|HTTP GET /Counter/Count responded 200 in 0.2160 ms
-const string logTemplate =
-    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
-
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-    .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("SourceContext"),
-        enrichmentConfig => enrichmentConfig.WithProperty("SourceContext", "SourceContext"))
-    .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("ThreadName"),
-        enrichmentConfig => enrichmentConfig.WithProperty("ThreadName", "ThreadName"))
-    .Enrich.FromLogContext()
-    .Enrich.WithThreadId()
-    .Enrich.WithThreadName()
-    .WriteTo.Async(l => l.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log",
-        formatter: new JsonFormatter(),
-        rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1))
-    .WriteTo.Async(l => l.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code))
-    // .WriteTo.Console(outputTemplate: logTemplate, theme: AnsiConsoleTheme.Code)
-    // .WriteTo.File(path: $"{Assembly.GetEntryAssembly()?.GetName().Name}-.log", formatter: new JsonFormatter(),
-    //     rollingInterval: RollingInterval.Day, retainedFileCountLimit: 1)
-    .CreateLogger();
-Log.Information("启动中...");
+    .AddDefaultLogConfig()
+    .CreateBootstrapLogger();
+
+Log.Information("日志初始化完成,正在启动服务...");
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-
-    builder.Host.UseSerilog();
+    builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
+    builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
+    {
+        loggerConfiguration.AddCustomLogConfig(builder.Configuration)
+            // opentelemetry
+            .WriteTo.OpenTelemetry(builder.Configuration["OC_Endpoint"] ??
+                                   throw new InvalidOperationException("必须配置open telemetry的collector地址"));
+    });
 
     builder.Services.AddGrpc();
     builder.Services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content,
@@ -59,6 +49,8 @@ try
     builder.Services.AddSingleton<GlobalVar>();
     // cpu负载服务
     builder.Services.AddScoped<ICpuLoadService, MathCpuLoadService>();
+    // opentelemetry采集
+    builder.AddMyOpenTelemetry();
 
     var app = builder.Build();
 
@@ -74,6 +66,13 @@ try
 
     #endregion
 
+    // header添加TraceId
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Append("TraceId", Activity.Current?.TraceId.ToString());
+        await next();
+    });
+
     // 简化http输出
     app.UseSerilogRequestLogging();
 
@@ -81,7 +80,7 @@ try
 
     app.UseSwagger();
     app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1"); });
-
+    app.UseOpenTelemetryPrometheusScrapingEndpoint();
     app.UseRouting();
     app.UseAuthorization();
 
