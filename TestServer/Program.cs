@@ -1,13 +1,8 @@
 using System.Diagnostics;
-using System.Reflection;
 using IP2Region.Net.Abstractions;
 using IP2Region.Net.XDB;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Json;
-using Serilog.Sinks.OpenTelemetry;
-using Serilog.Sinks.SystemConsole.Themes;
 using TestServer.Extensions;
 using TestServer.Service;
 using TestServer.Tools;
@@ -35,8 +30,7 @@ try
         loggerConfiguration.AddCustomLogConfig(builder.Configuration);
         if (enableOpentelemetry)
         {
-            loggerConfiguration.WriteTo.OpenTelemetry(builder.Configuration["OC_Endpoint"] ??
-                                                       throw new InvalidOperationException("必须配置open telemetry的collector地址"));
+            loggerConfiguration.AddMyOpenTelemetry(builder.Configuration);
         }
     });
 

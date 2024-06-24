@@ -6,8 +6,8 @@ using TestServer.Tools;
 namespace TestServer.Controllers;
 
 /// <summary>
-/// ip控制器
-/// 虽然浏览器显示json格式有美化，但是为了在curl的时候更好看，还是选择了返回字符串
+///     ip控制器
+///     虽然浏览器显示json格式有美化，但是为了在curl的时候更好看，还是选择了返回字符串
 /// </summary>
 [ApiExplorerSettings(GroupName = "V1")]
 [ApiController]

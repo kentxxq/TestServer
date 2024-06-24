@@ -20,7 +20,7 @@ public class KenController : ControllerBase
         "ken-linux-x64", "ken-linux-musl-x64", "ken-linux-arm64", "ken-linux-arm"
     };
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public KenController(ILogger<KenController> logger, IpService ipService)
     {
         _logger = logger;

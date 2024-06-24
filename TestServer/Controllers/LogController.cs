@@ -10,7 +10,7 @@ public class LogController : ControllerBase
 {
     private readonly ILogger<LogController> _logger;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public LogController(ILogger<LogController> logger)
     {
         _logger = logger;

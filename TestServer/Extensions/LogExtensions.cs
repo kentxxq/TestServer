@@ -57,4 +57,17 @@ public static class LogExtensions
                     theme: AnsiConsoleTheme.Code)
             );
     }
+
+    public static LoggerConfiguration AddMyOpenTelemetry(this LoggerConfiguration loggerConfiguration,
+        IConfiguration configuration)
+    {
+        return loggerConfiguration.WriteTo.OpenTelemetry(options =>
+            {
+                options.Endpoint = configuration["OC_Endpoint"] ??
+                                   throw new InvalidOperationException("必须配置open telemetry的collector地址");
+                options.ResourceAttributes["service.name"] = ThisAssembly.Project.AssemblyName;
+                options.ResourceAttributes["job"] = ThisAssembly.Project.AssemblyName;
+            }
+        );
+    }
 }
