@@ -18,6 +18,7 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.63.0"/>
     <PackageReference Include="IP2Region.Net" Version="2.0.2"/>
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
     <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0"/>
     <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="3.0.0"/>
