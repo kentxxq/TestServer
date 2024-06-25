@@ -3,6 +3,7 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Pyroscope.OpenTelemetry;
 
 namespace TestServer.Extensions;
 
@@ -82,6 +83,7 @@ public static class MyOpenTelemetryExtension
                         o.FilterHttpRequestMessage = r => r.RequestUri?.PathAndQuery != "/healthz";
                     })
                     .AddQuartzInstrumentation()
+                    .AddProcessor(new PyroscopeSpanProcessor())
             // 默认 ParentBased(root=AlwaysOn) 全部采集
             // .SetSampler(new TraceIdRatioBasedSampler(0.1))  // 采集1/10的指标
             // debug用

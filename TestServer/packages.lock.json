@@ -133,6 +133,16 @@
           "OpenTelemetry.Api": "[1.9.0, 2.0.0)"
         }
       },
+      "Pyroscope.OpenTelemetry": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "l7TjHhJ/+oqO4S1kn61fz3slcl04gmRDaCkE2vP4zkinKOzny5JklFKQlG4NP9ikS1But2ttndVBHBUll3rinA==",
+        "dependencies": {
+          "OpenTelemetry": "1.8.0",
+          "Pyroscope": "0.8.14"
+        }
+      },
       "Serilog.AspNetCore": {
         "type": "Direct",
         "requested": "[8.0.1, )",
@@ -468,6 +478,11 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "OpenTelemetry.Api": "1.9.0"
         }
+      },
+      "Pyroscope": {
+        "type": "Transitive",
+        "resolved": "0.8.14",
+        "contentHash": "WW7N8rmtMgY8ka70yFKEf6vhzItq4AedD4LjBzPw6Hto9ZgHsvdT/PLeUx0QXq123ywe/PTqEOB3W5mjSFR7MQ=="
       },
       "Serilog": {
         "type": "Transitive",
