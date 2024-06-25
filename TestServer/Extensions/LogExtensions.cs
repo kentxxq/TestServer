@@ -20,7 +20,7 @@ public static class LogExtensions
             .MinimumLevel.Override("System", LogEventLevel.Warning)
             .Enrich.WithProperty("AppName", ThisAssembly.Project.AssemblyName)
             .Enrich.WithMachineName()
-            .Enrich.WithProperty("IP",StaticNetTool.GetLocalIP().ToString())
+            .Enrich.WithProperty("MachineIP",StaticNetTool.GetLocalIP().ToString())
             .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("SourceContext"),
                 enrichmentConfig => enrichmentConfig.WithProperty("SourceContext", "SourceContext"))
             .Enrich.When(logEvent => !logEvent.Properties.ContainsKey("ThreadName"),
@@ -72,7 +72,6 @@ public static class LogExtensions
                                    throw new InvalidOperationException("必须配置open telemetry的collector地址");
                 options.ResourceAttributes["service.name"] = ThisAssembly.Project.AssemblyName;
                 options.ResourceAttributes["job"] = ThisAssembly.Project.AssemblyName;
-                options.ResourceAttributes["server.ip"] = StaticNetTool.GetLocalIP().ToString();
             }
         );
     }
