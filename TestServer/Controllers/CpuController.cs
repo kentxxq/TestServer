@@ -17,7 +17,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     轻量负载,执行1000次
+    ///     轻量负载
     /// </summary>
     /// <returns></returns>
     [HttpGet("light")]
@@ -28,7 +28,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     中等负载,执行10000次
+    ///     中等负载
     /// </summary>
     /// <returns></returns>
     [HttpGet("medium")]
@@ -39,7 +39,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     重度负载,执行100000
+    ///     重度负载
     /// </summary>
     /// <returns></returns>
     [HttpGet("heavy")]
@@ -50,13 +50,13 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     自定义负载次数
+    ///     自定义负载次数,int最大值2147483647
     /// </summary>
     /// <returns></returns>
     [HttpGet("{count}")]
     public IActionResult CustomLoad(int count)
     {
         _cpuLoadService.CustomLoad(count);
-        return Ok("mixed load completed");
+        return Ok($"{count} load completed");
     }
 }
