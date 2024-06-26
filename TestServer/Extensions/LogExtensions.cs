@@ -10,7 +10,7 @@ namespace TestServer.Extensions;
 public static class LogExtensions
 {
     public static readonly string DefaultLogTemplate =
-        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{IP}|{MachineName}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
+        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{MachineIP}|{MachineName}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
 
     private static LoggerConfiguration AddCommonConfig(this LoggerConfiguration loggerConfiguration)
     {
