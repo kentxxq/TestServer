@@ -89,7 +89,6 @@ try
     }
 
     app.UseRouting();
-    app.UseAuthorization();
 
     var webSocketOptions = new WebSocketOptions
     {
