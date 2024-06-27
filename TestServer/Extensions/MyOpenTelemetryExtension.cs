@@ -57,10 +57,10 @@ public static class MyOpenTelemetryExtension
                     o.RefreshIntervalSecs = 1;
                     // https://learn.microsoft.com/en-us/dotnet/core/diagnostics/available-counters
                     // o.AddEventSources("System.Runtime"); 有RuntimeInstrumentation和AspNetCoreInstrumentation就够了
-                    o.AddEventSources("Microsoft.AspNetCore.Hosting");
+                    // o.AddEventSources("Microsoft.AspNetCore.Hosting");
                     // o.AddEventSources("Microsoft.AspNetCore.Http.Connections"); 没看到输出
-                    o.AddEventSources("Microsoft-AspNetCore-Server-Kestrel");
-                    o.AddEventSources("System.Net.Http");
+                    // o.AddEventSources("Microsoft-AspNetCore-Server-Kestrel");
+                    // o.AddEventSources("System.Net.Http");
                     o.AddEventSources("System.Net.NameResolution");
                     // o.AddEventSources("System.Net.Security"); 主要是ssl信息，挂在代理后面不需要这个
                     o.AddEventSources("System.Net.Sockets");
