@@ -42,11 +42,11 @@
       },
       "OpenTelemetry.Exporter.Prometheus.AspNetCore": {
         "type": "Direct",
-        "requested": "[1.9.0-beta.1, )",
-        "resolved": "1.9.0-beta.1",
-        "contentHash": "42SBefbiR+C3Bvpf/EwaFNdOz+9wOMPcI9W6AAj/A40AnXUvqWMvnsuQ3j1d42+HqcRsKcBFpLco53DccEApBA==",
+        "requested": "[1.9.0-beta.2, )",
+        "resolved": "1.9.0-beta.2",
+        "contentHash": "JZXcHp2MkV/as8aLyJDapWkSNLhaQUWNnG1u2oOssq8Sg8217cX8D782sNJSzb7UfhzscR8pbzv6RZTsmPcHVw==",
         "dependencies": {
-          "OpenTelemetry": "1.9.0"
+          "OpenTelemetry": "[1.9.0, 2.0.0)"
         }
       },
       "OpenTelemetry.Exporter.Zipkin": {
