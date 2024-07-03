@@ -71,7 +71,7 @@ public static class LogExtensions
                                    throw new InvalidOperationException("必须配置open telemetry的collector地址");
                 options.ResourceAttributes["service.name"] = ThisAssembly.Project.AssemblyName;
                 options.ResourceAttributes["job"] = ThisAssembly.Project.AssemblyName;
-                options.ResourceAttributes["instanceId"] = instanceId;
+                options.ResourceAttributes["service.instance.id"] = instanceId;
             }
         );
     }
