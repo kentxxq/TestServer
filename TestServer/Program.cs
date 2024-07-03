@@ -20,13 +20,18 @@ try
     builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
     var enableOpentelemetry = builder.Configuration.GetValue("EnableOpenTelemetry", false);
 
+    if (enableOpentelemetry)
+    {
+        // 必须在AddMyOpenTelemetry之前,不能和下面的放在一起
+        builder.AddMyOpenTelemetry(instanceId);
+    }
+
     builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
     {
         loggerConfiguration
             .AddCustomLogConfig(builder.Configuration);
         if (enableOpentelemetry)
         {
-            builder.AddMyOpenTelemetry(instanceId);
             loggerConfiguration.AddMyOpenTelemetry(builder.Configuration,instanceId);
         }
     });
