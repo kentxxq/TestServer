@@ -16,8 +16,9 @@ public static class MyOpenTelemetryExtension
 
     /// <summary>添加OpenTelemetry</summary>
     /// <param name="builder"></param>
+    /// <param name="instanceId"></param>
     /// <returns></returns>
-    public static void AddMyOpenTelemetry(this WebApplicationBuilder builder)
+    public static void AddMyOpenTelemetry(this WebApplicationBuilder builder,string instanceId)
     {
         // 不要开代理!!!!!!
         // 不要开代理!!!!!!
@@ -28,7 +29,7 @@ public static class MyOpenTelemetryExtension
         // 统一配置名称,版本,连接地址
         var openTelemetryBuilder = builder.Services.AddOpenTelemetry()
             .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(_ocEndpoint))
-            .ConfigureResource(resourceBuilder => resourceBuilder.AddService(AppName, serviceVersion: AppVersion));
+            .ConfigureResource(resourceBuilder => resourceBuilder.AddService(AppName, serviceVersion: AppVersion,serviceInstanceId:instanceId));
 
         // 日志让serilog自己发送
         // openTelemetryBuilder.WithLogging();

@@ -7,6 +7,7 @@ using TestServer.Extensions;
 using TestServer.Service;
 using TestServer.Tools;
 
+var instanceId = Guid.NewGuid().ToString();
 Log.Logger = new LoggerConfiguration()
     .AddDefaultLogConfig()
     .CreateBootstrapLogger();
@@ -19,18 +20,14 @@ try
     builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
     var enableOpentelemetry = builder.Configuration.GetValue("EnableOpenTelemetry", false);
 
-    if (enableOpentelemetry)
-    {
-        // opentelemetry采集,这里必须配置在log之前
-        builder.AddMyOpenTelemetry();
-    }
-
     builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
     {
-        loggerConfiguration.AddCustomLogConfig(builder.Configuration);
+        loggerConfiguration
+            .AddCustomLogConfig(builder.Configuration);
         if (enableOpentelemetry)
         {
-            loggerConfiguration.AddMyOpenTelemetry(builder.Configuration);
+            builder.AddMyOpenTelemetry(instanceId);
+            loggerConfiguration.AddMyOpenTelemetry(builder.Configuration,instanceId);
         }
     });
 

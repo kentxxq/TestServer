@@ -9,8 +9,7 @@ namespace TestServer.Extensions;
 
 public static class LogExtensions
 {
-    public static readonly string DefaultLogTemplate =
-        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{MachineIP}|{MachineName}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
+    private const string DefaultLogTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}|{Level:u3}|{SourceContext}|{MachineIP}|{MachineName}|{ThreadName}|{ThreadId}|{Message:lj}{Exception}{NewLine}";
 
     private static LoggerConfiguration AddCommonConfig(this LoggerConfiguration loggerConfiguration)
     {
@@ -64,7 +63,7 @@ public static class LogExtensions
     }
 
     public static LoggerConfiguration AddMyOpenTelemetry(this LoggerConfiguration loggerConfiguration,
-        IConfiguration configuration)
+        IConfiguration configuration, string instanceId)
     {
         return loggerConfiguration.WriteTo.OpenTelemetry(options =>
             {
@@ -72,6 +71,7 @@ public static class LogExtensions
                                    throw new InvalidOperationException("必须配置open telemetry的collector地址");
                 options.ResourceAttributes["service.name"] = ThisAssembly.Project.AssemblyName;
                 options.ResourceAttributes["job"] = ThisAssembly.Project.AssemblyName;
+                options.ResourceAttributes["instanceId"] = instanceId;
             }
         );
     }
