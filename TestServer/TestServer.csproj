@@ -15,15 +15,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.63.0"/>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
     <PackageReference Include="IP2Region.Net" Version="2.0.2"/>
     <PackageReference Include="Pyroscope.OpenTelemetry" Version="0.2.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
     <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0"/>
-    <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="3.0.0"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
     <PackageReference Include="WebDav.Client" Version="2.8.0"/>
   </ItemGroup>
 
@@ -40,7 +40,7 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.Process" Version="0.5.0-beta.6"/>
     <PackageReference Include="OpenTelemetry.Instrumentation.Quartz" Version="1.0.0-beta.3"/>
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0"/>
-    <PackageReference Include="ThisAssembly" Version="1.4.3">
+    <PackageReference Include="ThisAssembly" Version="1.5.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
