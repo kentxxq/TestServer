@@ -17,7 +17,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     轻量负载
+    ///     轻量负载,运算10**6次开平方
     /// </summary>
     /// <returns></returns>
     [HttpGet("light")]
@@ -28,7 +28,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     中等负载
+    ///     中等负载,运算10**7次开平方
     /// </summary>
     /// <returns></returns>
     [HttpGet("medium")]
@@ -39,7 +39,7 @@ public class CpuController : ControllerBase
     }
 
     /// <summary>
-    ///     重度负载
+    ///     重度负载,运算10**8次开平方
     /// </summary>
     /// <returns></returns>
     [HttpGet("heavy")]
