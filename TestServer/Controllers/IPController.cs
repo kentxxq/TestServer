@@ -9,7 +9,7 @@ namespace TestServer.Controllers;
 ///     ip控制器
 ///     虽然浏览器显示json格式有美化，但是为了在curl的时候更好看，还是选择了返回字符串
 /// </summary>
-[ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]")]
 public class IPController : ControllerBase
@@ -23,8 +23,7 @@ public class IPController : ControllerBase
         _ipService = ipService;
     }
 
-    /// <summary>访问者的ip信息</summary>
-    /// <returns></returns>
+    [EndpointDescription("访问者的ip信息")]
     [HttpGet]
     public async Task<string> VisitorInfo()
     {
@@ -32,8 +31,7 @@ public class IPController : ControllerBase
         return JsonSerializer.Serialize(result, StaticData.PrettyPrintJsonSerializerOptions);
     }
 
-    /// <summary>查看特定的ip信息</summary>
-    /// <returns></returns>
+    [EndpointDescription("查看特定的ip信息")]
     [HttpGet("{ip?}")]
     public async Task<string> IpInfo(string ip)
     {
