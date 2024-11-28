@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 using TestServer.Service;
 
 namespace TestServer.Controllers;
 
 /// <summary>ken控制器</summary>
-[ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]")]
 public class KenController : ControllerBase
@@ -27,8 +28,7 @@ public class KenController : ControllerBase
         _ipService = ipService;
     }
 
-    /// <summary>列出所有的平台版本</summary>
-    /// <returns></returns>
+    [EndpointDescription("列出所有的平台版本")]
     [HttpGet]
     public string ListPlatform()
     {
@@ -36,10 +36,9 @@ public class KenController : ControllerBase
     }
 
 
-    /// <summary>跳转到特定的版本</summary>
-    /// <returns></returns>
+    [EndpointDescription("跳转到特定的版本")]
     [HttpGet("{name?}")]
-    public async Task<IActionResult> DownloadRedirect(string name)
+    public async Task<IActionResult> DownloadRedirect([Description("版本号")]string name)
     {
         string url;
         if (!string.IsNullOrEmpty(name) && KenPlatform.Contains(name))

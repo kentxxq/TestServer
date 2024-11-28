@@ -2,6 +2,7 @@ using System.Diagnostics;
 using IP2Region.Net.Abstractions;
 using IP2Region.Net.XDB;
 using Microsoft.AspNetCore.HttpOverrides;
+using Scalar.AspNetCore;
 using Serilog;
 using TestServer.Extensions;
 using TestServer.Service;
@@ -41,7 +42,8 @@ try
         Path.Combine(AppContext.BaseDirectory, "ip2region.xdb")));
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddMySwagger();
+    // builder.Services.AddMySwagger();
+    builder.Services.AddOpenApi();
     builder.Services.Configure<ForwardedHeadersOptions>(options =>
     {
         options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
@@ -82,8 +84,13 @@ try
 
     app.UseForwardedHeaders();
 
-    app.UseSwagger();
-    app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/V1/swagger.json", "V1"); });
+    app.MapOpenApi();
+    app.MapScalarApiReference(option =>
+    {
+        // 使用正确的base url
+        // https://github.com/dotnet/aspnetcore/issues/57332, 或者添加库 https://github.com/dotnet/aspnetcore/issues/57332#issuecomment-2479286855
+        option.Servers = [];
+    });
 
     if (enableOpentelemetry)
     {

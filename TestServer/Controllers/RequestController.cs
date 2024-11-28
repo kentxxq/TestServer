@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace TestServer.Controllers;
 
 /// <summary>request控制器</summary>
-[ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]")]
 public class RequestController : Controller
 {
-    /// <summary>返回请求的相关信息</summary>
-    /// <returns></returns>
+    [EndpointDescription("返回请求的相关信息")]
     [HttpGet]
     [HttpPost]
     [HttpDelete]

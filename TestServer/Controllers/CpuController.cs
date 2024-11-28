@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 using TestServer.Service;
 
 namespace TestServer.Controllers;
 
 /// <summary>cpu控制器</summary>
-[ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]/[action]")]
 public class CpuController : ControllerBase
@@ -16,10 +17,7 @@ public class CpuController : ControllerBase
         _cpuLoadService = cpuLoadService;
     }
 
-    /// <summary>
-    ///     轻量负载,运算10**6次开平方
-    /// </summary>
-    /// <returns></returns>
+    [EndpointDescription("轻量负载,运算10**6次开平方")]
     [HttpGet("light")]
     public IActionResult LightLoad()
     {
@@ -27,10 +25,7 @@ public class CpuController : ControllerBase
         return Ok("Light load completed");
     }
 
-    /// <summary>
-    ///     中等负载,运算10**7次开平方
-    /// </summary>
-    /// <returns></returns>
+    [EndpointDescription("中等负载,运算10**7次开平方")]
     [HttpGet("medium")]
     public IActionResult MediumLoad()
     {
@@ -38,10 +33,7 @@ public class CpuController : ControllerBase
         return Ok("Medium load completed");
     }
 
-    /// <summary>
-    ///     重度负载,运算10**8次开平方
-    /// </summary>
-    /// <returns></returns>
+    [EndpointDescription("重度负载,运算10**8次开平方")]
     [HttpGet("heavy")]
     public IActionResult HeavyLoad()
     {
@@ -49,12 +41,9 @@ public class CpuController : ControllerBase
         return Ok("Heavy load completed");
     }
 
-    /// <summary>
-    ///     自定义负载次数,int最大值2147483647
-    /// </summary>
-    /// <returns></returns>
+    [EndpointDescription("自定义负载次数,int最大值2147483647")]
     [HttpGet("{count}")]
-    public IActionResult CustomLoad(int count)
+    public IActionResult CustomLoad([Description("负载次数")]int count)
     {
         _cpuLoadService.CustomLoad(count);
         return Ok($"{count} load completed");

@@ -3,15 +3,14 @@
 namespace TestServer.Controllers;
 
 /// <summary>counter控制器</summary>
-[ApiExplorerSettings(GroupName = "V1")]
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]/[action]")]
 public class CounterController : ControllerBase
 {
     private static int _count;
 
-    /// <summary>+1</summary>
-    /// <returns></returns>
+    [EndpointDescription("+1")]
     [HttpGet]
     public string Count()
     {
@@ -20,8 +19,7 @@ public class CounterController : ControllerBase
         return _count.ToString();
     }
 
-    /// <summary>重置计数器</summary>
-    /// <returns></returns>
+    [EndpointDescription("重置计数器")]
     [HttpGet]
     public string Reset()
     {
