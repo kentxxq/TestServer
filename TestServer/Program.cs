@@ -41,8 +41,6 @@ try
     builder.Services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content,
         Path.Combine(AppContext.BaseDirectory, "ip2region.xdb")));
     builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    // builder.Services.AddMySwagger();
     builder.Services.AddOpenApi();
     builder.Services.Configure<ForwardedHeadersOptions>(options =>
     {

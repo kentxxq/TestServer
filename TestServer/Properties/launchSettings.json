@@ -3,7 +3,7 @@
     "TestServer": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "swagger",
+      "launchUrl": "scalar/v1",
       "workingDirectory": "$(OutputPath)",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -14,7 +14,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/scalar/v1",
       "publishAllPorts": true
     }
   },

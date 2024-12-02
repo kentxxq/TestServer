@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TestServer.Controllers;
 
 /// <summary>delay控制器</summary>
+[ApiExplorerSettings(GroupName = "v1")]
 [ApiController]
 [Route("[controller]")]
 public class DelayController : ControllerBase
