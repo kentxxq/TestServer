@@ -10,7 +10,7 @@ namespace TestServer.Controllers;
 [Route("[controller]")]
 public class KenController : ControllerBase
 {
-    private const string ProxyServerUrl = "https://mirror.ghproxy.com/";
+    private const string ProxyServerUrl = "https://ghp.ci/";
     private readonly IpService _ipService;
     private readonly ILogger<KenController> _logger;
 
