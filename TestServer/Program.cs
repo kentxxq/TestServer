@@ -8,33 +8,25 @@ using TestServer.Extensions;
 using TestServer.Service;
 using TestServer.Tools;
 
-var instanceId = Guid.NewGuid().ToString();
-Log.Logger = new LoggerConfiguration()
-    .AddDefaultLogConfig()
-    .CreateBootstrapLogger();
-
-Log.Information("日志初始化完成,正在启动服务...");
-
 try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
-    var enableOpentelemetry = builder.Configuration.GetValue("EnableOpenTelemetry", false);
-
-    if (enableOpentelemetry)
-    {
-        // 必须在AddMyOpenTelemetry之前,不能和下面的放在一起
-        builder.AddMyOpenTelemetry(instanceId);
-    }
-
-    builder.Host.UseSerilog((serviceProvider, loggerConfiguration) =>
-    {
-        loggerConfiguration
-            .AddCustomLogConfig(builder.Configuration);
-        if (enableOpentelemetry)
-        {
-            loggerConfiguration.AddMyOpenTelemetry(builder.Configuration,instanceId);
-        }
+    var instanceId = Guid.NewGuid().ToString();
+    var enableOpentelemetry = builder.Configuration.GetValue(LogExtensions.OpenTelemetryConfigName, false);
+// AddMyOpenTelemetry必须一起使用
+// if (enableOpentelemetry)
+// {
+//     // 必须在AddMyOpenTelemetry之前,不能和下面的放在一起
+//     builder.AddMyOpenTelemetry(instanceId);
+// }
+    builder.Services.AddSerilog((services, lc) => {
+        lc.AddCustomLogConfig(builder.Configuration);
+        // 必须和AddMyOpenTelemetry配合使用
+        // if (enableOpentelemetry)
+        // {
+        //     lc.AddMyOpenTelemetry(builder.Configuration,instanceId);
+        // }
     });
 
     builder.Services.AddGrpc();
