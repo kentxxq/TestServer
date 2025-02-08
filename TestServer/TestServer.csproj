@@ -63,7 +63,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <ip2regionDB>https://mirror.ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
+    <ip2regionDB>https://ghfast.top/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
   </PropertyGroup>
 
   <Target Name="DownloadPublishDirFiles" AfterTargets="Publish" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
