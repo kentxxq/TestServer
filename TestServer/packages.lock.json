@@ -210,17 +210,17 @@
       },
       "ThisAssembly": {
         "type": "Direct",
-        "requested": "[2.0.10, )",
-        "resolved": "2.0.10",
-        "contentHash": "TYHd88DAhb6IW+PqHWwYIUpml9doLe6mZCGMey3H867GvBWWvGo3xXxU0GoJitypWyTrTWy7TwNwuEDUQg9w4w==",
+        "requested": "[2.0.12, )",
+        "resolved": "2.0.12",
+        "contentHash": "jFoblxE4XLY38qagU0x3niK9rB/dOkTfIBU/OK+sRZB4lRRVceLz7op4jD+IbZYWqQvgXjdxHInJwkZlSVmKgg==",
         "dependencies": {
-          "ThisAssembly.AssemblyInfo": "2.0.10",
-          "ThisAssembly.Constants": "2.0.10",
-          "ThisAssembly.Git": "2.0.10",
-          "ThisAssembly.Metadata": "2.0.10",
-          "ThisAssembly.Project": "2.0.10",
-          "ThisAssembly.Resources": "2.0.10",
-          "ThisAssembly.Strings": "2.0.10"
+          "ThisAssembly.AssemblyInfo": "2.0.12",
+          "ThisAssembly.Constants": "2.0.12",
+          "ThisAssembly.Git": "2.0.12",
+          "ThisAssembly.Metadata": "2.0.12",
+          "ThisAssembly.Project": "2.0.12",
+          "ThisAssembly.Resources": "2.0.12",
+          "ThisAssembly.Strings": "2.0.12"
         }
       },
       "WebDav.Client": {
@@ -551,16 +551,16 @@
       },
       "ThisAssembly.AssemblyInfo": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "5gdMJTsAqHF4Vxtk9Z1BHmrsXVgAzfhKm4zrZAQpOfwJo/zwGQ1nrZwVdR5nL3InMt3sPVoz8tRd+lPsvbw0IQ==",
+        "resolved": "2.0.12",
+        "contentHash": "3aDlrR2uxe5GbMaJBgpGoS/+4f5oQURZnKF75nPnf+gi9CBaOq4JkOeDGrUXqajn+lT+xG5hpmEvbiw8EZFFnA==",
         "dependencies": {
-          "ThisAssembly.Constants": "2.0.10"
+          "ThisAssembly.Constants": "2.0.12"
         }
       },
       "ThisAssembly.Constants": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "FQGztsF8h8nI5wX4R25XS/gXTknMsUcKeSDfQ828WTs+gtoXoQsSDDI5ENZQS2SP61hKfSZokPCBzyQhOS7wow==",
+        "resolved": "2.0.12",
+        "contentHash": "FAOxFdTrOUeVmylbGGzaOCgAnCLAAeFJsOYEwmDoXg8i3OZWVedk9GWACW1StiqWByPrgT+9l3P7wgivvrfXFA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Threading.Tasks.Extensions": "4.5.4"
@@ -568,32 +568,32 @@
       },
       "ThisAssembly.Git": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "Wk2Y0ArN6WTFEBGQ9iqfBjKUZCLJVy8ztFJE0Sqgd0dE20KesDVkqtxGmQCZHqz+l8QMXw2lYpzm9R5C4UiB1Q==",
+        "resolved": "2.0.12",
+        "contentHash": "0QTintv95I8sEwvLg32LyUiz+57yl8dPG3+uni+VglOHXCKJj8bdFwt4ZWU6g3xqqJ8Kqv0csO463VGogUo4cg==",
         "dependencies": {
-          "ThisAssembly.Constants": "2.0.10"
+          "ThisAssembly.Constants": "2.0.12"
         }
       },
       "ThisAssembly.Metadata": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "adyVUgz5xq2ChPHOzVYcFl56Pi1yscVNBefiXO05wDn2KhNOUs3HmVN27z+Wo8UYCtAeSxu+PQDivrThmACbyQ==",
+        "resolved": "2.0.12",
+        "contentHash": "blsE0Z/JCJltIBqib07sW6Lk4QzeLrgJnUnXLGeiUduhz8KCltd7qjj0AeGhG++TylFGRuH20zgjyaeS0XVLLg==",
         "dependencies": {
-          "ThisAssembly.Constants": "2.0.10"
+          "ThisAssembly.Constants": "2.0.12"
         }
       },
       "ThisAssembly.Project": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "gOwc+1Q9mEByfwmg2XvrXpx8nTwMLgIQynfEnWkFHO+7peHzFVwVXpoYcSzaAxnxboBZGCQ5goMMvPsy0EvWgA==",
+        "resolved": "2.0.12",
+        "contentHash": "AQWl8FtZ/2ew91VKjvJOYr8YDTOCfaiHSKMBg4wU9502L4iI8uhh27AUEluZDsG+jhRoolXB459sdaVWKIji8Q==",
         "dependencies": {
-          "ThisAssembly.Constants": "2.0.10"
+          "ThisAssembly.Constants": "2.0.12"
         }
       },
       "ThisAssembly.Resources": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "Z9lG3zqVZ7fsrvlUGglNa7tEFZXoMtH6zaNRE/P9a0pEnBR8JJ6BopJOhbP4plcLKOi1Np4dtn53jYFy8xqb+Q==",
+        "resolved": "2.0.12",
+        "contentHash": "Sz0E/ypNWco1r5HT7zGd7MBeSYBcCSKKF5XMus37pq0UfVxk375pXBgFRdyYCcZt4P75eWciDDDnT5oifYKlBQ==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Threading.Tasks.Extensions": "4.5.4"
@@ -601,8 +601,8 @@
       },
       "ThisAssembly.Strings": {
         "type": "Transitive",
-        "resolved": "2.0.10",
-        "contentHash": "GpO8chJzkWWl27Ad8ssa9lojbcnMJcq4FVyKRvfXbijxRonyFOReZhRGfYftJ/QD3lGOCimo6B/I5ELjsdIZbQ==",
+        "resolved": "2.0.12",
+        "contentHash": "kFa94H2wyrKRMtiVf2+1lzHDI4AZyQhO6z7VsT5LLlIeqa6fWHbPKwbF57MK9ZRLP83CDt4iOnG2thiwa8rRTw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Threading.Tasks.Extensions": "4.5.4"
